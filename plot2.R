@@ -17,5 +17,11 @@ tidydata <- (subset(electricdata, electricdata$newdatetime > "2007-02-01"))
 #tidyset <- subset(electricdata, electricdata$Date==as.Date("2007-02-01") | electricdata$Date==as.Date("2007-02-02"))
 tidydata <- (subset(tidydata, tidydata$newdatetime < "2007-02-03"))
 
-plot(tidydata$newdatetime, tidydata$Global_active_power)
-
+plot(tidydata$newdatetime, (as.numeric(tidydata$Global_active_power) / 1000)
+     ,ylab="Global Active Power (kilowatts)"
+     ,xlab="Day of Week"
+     ,type="l"
+     ,col="blue"
+     ,ylim=c(0,6)
+     )
+dev.copy(png, "plot2.png")
