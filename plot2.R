@@ -1,5 +1,3 @@
-library("dplyr")
-
 # Set default directory
 setwd("C:\\Rprograms\\ExploritoryData")
 
@@ -13,9 +11,11 @@ electricdata <- read.table(file.path(tempdir(), "/myzip/household_power_consumpt
 
 #add column for date and time to use function on 
 electricdata$newdatetime <- as.POSIXct(paste(electricdata$Date, electricdata$Time), format="%d/%m/%Y %H:%M:%S")
+#make tidyset to use to plot graphs
 tidydata <- (subset(electricdata, electricdata$newdatetime > "2007-02-01"))
 #make tidyset to use to plot graphs
 #tidyset <- subset(electricdata, electricdata$Date==as.Date("2007-02-01") | electricdata$Date==as.Date("2007-02-02"))
 tidydata <- (subset(tidydata, tidydata$newdatetime < "2007-02-03"))
 
 plot(tidydata$newdatetime, tidydata$Global_active_power)
+
