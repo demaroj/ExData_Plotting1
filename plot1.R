@@ -18,7 +18,7 @@ tidydata <- (subset(electricdata, electricdata$newdatetime >= "2007-02-01"))
 tidydata <- (subset(tidydata, tidydata$newdatetime < "2007-02-03"))
 #create plot
 hist(
-  (as.numeric(tidydata$Global_active_power) * 2 / 1000 )
+  (as.numeric(as.character(tidydata$Global_active_power)) )
      , xlab="Global Active Power (kilowatts)" 
      , col="Red"
      , main="Global Active Power"
