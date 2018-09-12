@@ -17,9 +17,9 @@ tidydata <- (subset(electricdata, electricdata$newdatetime > "2007-02-01"))
 tidydata <- (subset(tidydata, tidydata$newdatetime < "2007-02-03"))
 
 x<-tidydata$newdatetime
-y1<-as.numeric(tidydata$Sub_metering_1)
-y2<-as.numeric(tidydata$Sub_metering_2)
-y3<-as.numeric(tidydata$Sub_metering_3)
+y1<-as.numeric(as.character(tidydata$Sub_metering_1))
+y2<-as.numeric(as.character(tidydata$Sub_metering_2))
+y3<-as.numeric(as.character(tidydata$Sub_metering_3))
 
 
 #plot graph

@@ -18,13 +18,13 @@ tidydata <- (subset(electricdata, electricdata$newdatetime >= "2007-02-01"))
 tidydata <- (subset(tidydata, tidydata$newdatetime < "2007-02-03"))
 #create plot
 hist(
-  (as.numeric(tidydata$Global_active_power) * 10 )
+  (as.numeric(tidydata$Global_active_power) * 2 / 1000 )
      , xlab="Global Active Power (kilowatts)" 
      , col="Red"
      , main="Global Active Power"
     # , axis(1, at=seq(0,6,by=2), labels=seq(0,6,by=2) )
-     , xlim=c(0,6)
-    # , ylim=c(0,1200)
+    # , xlim=c(0,6)
+     , ylim=c(0,1200)
      , breaks=15
     )
-#dev.copy(png, "plot1.png")
+dev.copy(png, "plot1.png")

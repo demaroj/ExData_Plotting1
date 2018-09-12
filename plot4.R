@@ -12,27 +12,29 @@ electricdata <- read.table(file.path(tempdir(), "/myzip/household_power_consumpt
 #add column for date and time to use function on 
 electricdata$newdatetime <- as.POSIXct(paste(electricdata$Date, electricdata$Time), format="%d/%m/%Y %H:%M:%S")
 #make tidyset to use to plot graphs
-tidydata <- (subset(electricdata, electricdata$newdatetime > "2007-02-01"))
+tidydata <- (subset(electricdata, electricdata$newdatetime >= "2007-02-01"))
 #make tidyset to use to plot graphs
 #tidyset <- subset(electricdata, electricdata$Date==as.Date("2007-02-01") | electricdata$Date==as.Date("2007-02-02"))
 tidydata <- (subset(tidydata, tidydata$newdatetime < "2007-02-03"))
 
-
+#plot graphs in 2x2 panel
 par(mfrow=c(2,2))
 
 #create plot a
-hist((as.numeric(tidydata$Global_active_power) / 1000)
-     , xlab="Global Active Power (kilowatts)"
-     , col="Red"
-     , main="Global Active Power"
+plot(tidydata$newdatetime,(as.numeric(as.character(tidydata$Global_active_power)))
+     #, xlab="Global Active Power (kilowatts)"
+     , col="black"
+     , type="l"
+     , xlab=""
+     , ylab="Global Active Power"
      # , axis(1, at=seq(0,6,by=2), labels=seq(0,6,by=2) )
-     , xlim=c(0,6)
+     # xlim=c(0,6)
      # , ylim=c(0,1200)
-     , breaks=15
+     #, breaks=15
 )
 
 #create plot b
-plot(tidydata$newdatetime, (as.numeric(tidydata$Voltage))
+plot(tidydata$newdatetime, as.numeric(as.character(tidydata$Voltage))
      ,ylab="Voltage"
      ,xlab="datetime"
      ,type="l"
@@ -42,18 +44,19 @@ plot(tidydata$newdatetime, (as.numeric(tidydata$Voltage))
 
 #create plot c
 x<-tidydata$newdatetime
-y1<-as.numeric(tidydata$Sub_metering_1)
-y2<-as.numeric(tidydata$Sub_metering_2)
-y3<-as.numeric(tidydata$Sub_metering_3)
+y1<-as.numeric(as.character(tidydata$Sub_metering_1))
+y2<-as.numeric(as.character(tidydata$Sub_metering_2))
+y3<-as.numeric(as.character(tidydata$Sub_metering_3))
+
 #plot graph
-plot(x,y1,type="l", col="black", ylab="Energy sub metering",  xlab="", cex.lab=0.75)
+plot(x,y1,type="l", col="black", ylab="Energy sub metering",  xlab="")
 lines(x,y2,col="red")
 lines(x,y3,col="blue")
 
-legend("topright",legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), lty=1, col=c("black","red","blue"), box.col="black")
+legend("topright",inset=0.01,legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), box.col="white", lty=1, col=c("black","red","blue"), cex=0.75)
 
 #create plot d
-plot(tidydata$newdatetime, (as.numeric(tidydata$Global_reactive_power))
+plot(tidydata$newdatetime, as.numeric(as.character(tidydata$Global_reactive_power))
      ,ylab="Global_reactive_power"
      ,xlab="datetime"
      ,type="l"

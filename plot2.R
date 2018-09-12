@@ -12,14 +12,14 @@ electricdata <- read.table(file.path(tempdir(), "/myzip/household_power_consumpt
 #add column for date and time to use function on 
 electricdata$newdatetime <- as.POSIXct(paste(electricdata$Date, electricdata$Time), format="%d/%m/%Y %H:%M:%S")
 #make tidyset to use to plot graphs
-tidydata <- (subset(electricdata, electricdata$newdatetime > "2007-02-01"))
+tidydata <- (subset(electricdata, electricdata$newdatetime >= "2007-02-01"))
 #make tidyset to use to plot graphs
 #tidyset <- subset(electricdata, electricdata$Date==as.Date("2007-02-01") | electricdata$Date==as.Date("2007-02-02"))
 tidydata <- (subset(tidydata, tidydata$newdatetime < "2007-02-03"))
 
-plot(tidydata$newdatetime, (as.numeric(tidydata$Global_active_power) / 1000)
+plot(tidydata$newdatetime, (as.numeric(tidydata$Global_active_power) / 500)
      ,ylab="Global Active Power (kilowatts)"
-     ,xlab="Day of Week"
+     ,xlab=""
      ,type="l"
      ,col="black"
      ,ylim=c(0,6)
