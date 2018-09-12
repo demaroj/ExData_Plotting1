@@ -21,7 +21,7 @@ plot(tidydata$newdatetime, (as.numeric(tidydata$Global_active_power) / 1000)
      ,ylab="Global Active Power (kilowatts)"
      ,xlab="Day of Week"
      ,type="l"
-     ,col="blue"
+     ,col="black"
      ,ylim=c(0,6)
      )
 dev.copy(png, "plot2.png")

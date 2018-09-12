@@ -23,10 +23,10 @@ y3<-as.numeric(tidydata$Sub_metering_3)
 
 
 #plot graph
-plot(x,y1,type="l", main="Plot_3",col="brown", ylab="Energy sub metering", xlab="datetime", cex.lab=0.75)
+plot(x,y1,type="l", col="black", ylab="Energy sub metering",  xlab="", cex.lab=0.75)
 lines(x,y2,col="red")
 lines(x,y3,col="blue")
 
-legend("topright",legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), lty=1:2, col=c("brown","red","blue"), box.col="orange")
+legend("topright",legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), lty=1, col=c("black","red","blue"), box.col="black")
 
 dev.copy(png, "plot3.png")

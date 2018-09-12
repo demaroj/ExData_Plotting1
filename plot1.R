@@ -10,14 +10,16 @@ unzip(tf, exdir = td <- file.path(tempdir(), "myzip"))
 electricdata <- read.table(file.path(tempdir(), "/myzip/household_power_consumption.txt"), sep=";", header= TRUE)
 
 #add column for date and time to use function on 
-electricdata$newdatetime <- as.Date(paste(electricdata$Date, electricdata$Time), format="%d/%m/%Y %H:%M:%S")
+electricdata$newdatetime <- as.POSIXct(paste(electricdata$Date, electricdata$Time), format="%d/%m/%Y %H:%M:%S")
+#make tidyset to use to plot graphs
+tidydata <- (subset(electricdata, electricdata$newdatetime >= "2007-02-01"))
 
 #make tidyset to use to plot graphs
-tidyset <- subset(electricdata, electricdata$newdatetime==as.Date("2007-02-01") | electricdata$newdatetime==as.Date("2007-02-02"))
-
+tidydata <- (subset(tidydata, tidydata$newdatetime < "2007-02-03"))
 #create plot
-hist((as.numeric(tidyset$Global_active_power) / 1000)
-     , xlab="Global Active Power (kilowatts)"
+hist(
+  (as.numeric(tidydata$Global_active_power) * 10 )
+     , xlab="Global Active Power (kilowatts)" 
      , col="Red"
      , main="Global Active Power"
     # , axis(1, at=seq(0,6,by=2), labels=seq(0,6,by=2) )
@@ -25,4 +27,4 @@ hist((as.numeric(tidyset$Global_active_power) / 1000)
     # , ylim=c(0,1200)
      , breaks=15
     )
-dev.copy(png, "plot1.png")
+#dev.copy(png, "plot1.png")
